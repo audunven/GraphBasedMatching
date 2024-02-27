@@ -94,11 +94,19 @@ public class ReadJson {
 						String kcode = null;
 						String description = null;
 						String functionId = null;
+						
+						boolean countyGovernance = true;
+						boolean municipalityGovernance = true;
+						boolean stateGovernance = true;
 
 						List<LegalReference> legalReferences = new ArrayList<LegalReference>();
 						List<KostraCode> kostraCodes = new ArrayList<KostraCode>();
 						JsonArray lawAndRegulationsArray;
 						JsonArray kostraCodeArray;
+						JsonObject governanceObject;
+						JsonObject countyObject;
+						JsonObject municipalityObject;
+						JsonObject stateObject;
 						for (Map.Entry<String, JsonElement> properties : levelFourEntries) {
 
 							if (properties.getValue().isJsonArray() == true) {
@@ -223,7 +231,31 @@ public class ReadJson {
 									
 								}
 
-							} else {
+							} else if (properties.getKey().equals("governance")) {
+								
+								governanceObject = properties.getValue().getAsJsonObject();
+								Set<Map.Entry<String, JsonElement>> governanceEntries = governanceObject.entrySet();
+								
+//								boolean countyGovernance = true;
+//								boolean municipalityGovernance = true;
+//								boolean stateGovernance = true;
+								
+								for (Map.Entry<String, JsonElement> governanceProperties : governanceEntries) {
+									
+									if (governanceProperties.getKey().equals("county")) {
+										countyGovernance = governanceProperties.getValue().getAsBoolean();
+									} else if (governanceProperties.getKey().equals("municipality")) {
+										municipalityGovernance = governanceProperties.getValue().getAsBoolean();
+									} else {
+										stateGovernance = governanceProperties.getValue().getAsBoolean();
+									}												
+								}
+								
+							}
+							
+							
+							
+							else {
 
 								System.out.println(properties.getKey() + ": " + properties.getValue());
 								if (properties.getKey().equals("id")) {
@@ -255,6 +287,9 @@ public class ReadJson {
 								.setL3Title(l3Function)
 								.setLegalReferences(legalReferences)
 								.setKostraCodes(kostraCodes)
+								.setCountyGovernance(countyGovernance)
+								.setMunicipalityGovernance(municipalityGovernance)
+								.setStateGovernance(stateGovernance)
 								.build();
 
 						allFunctions.add(kcf);

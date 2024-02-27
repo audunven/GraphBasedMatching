@@ -111,7 +111,11 @@ public class KCodesFunction {
 	  public String toString() {
 		  
 		  return "Id: " + this.id + "\nTitle: " + this.title + "\nKCode: " 
-		  + this.code + "\nL1-function: " + this.l1Title + "\nL2-function: " 
+		  + this.code 
+		  + "\nCounty-governance: " + this.countyGovernance
+		  + "\nMunicipality-govnernace: " + this.municipalityGovernance
+		  + "\nState-governance: " + this.stateGovernance
+		  + "\nL1-function: " + this.l1Title + "\nL2-function: " 
 				  + this.l2Title + "\nL3-function: " + this.l3Title 
 				  + "\nLegal References: " + this.legalReferences 
 				  + "\nKostra Codes:" + this.kostraCodes;
