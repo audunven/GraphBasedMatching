@@ -2,14 +2,10 @@ package json;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -20,7 +16,7 @@ import objects.KCodesFunction;
 import objects.KostraCode;
 import objects.LegalReference; 
 
-public class ReadJson {
+public class ParseKCodesJson {
 
 
 	public static void main(String[] args) throws FileNotFoundException {
