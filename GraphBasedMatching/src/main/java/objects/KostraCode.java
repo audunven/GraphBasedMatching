@@ -82,6 +82,11 @@ public class KostraCode {
 	    public int hashCode() {
 	        return Objects.hash(id);
 	    }
+	  
+	  public String toString() {
+		  
+		  return "Kostra Code ID: " + this.id;
+	  }
 
 	public static class KostraCodeBuilder {
 		
@@ -98,8 +103,9 @@ public class KostraCode {
 		
 		public KostraCodeBuilder() {}
 
-		public void setId(String id) {
+		public KostraCodeBuilder setId(String id) {
 			this.id = id;
+			return this;
 		}
 
 		public KostraCodeBuilder setMunicipalityArea(String municipalityArea) {

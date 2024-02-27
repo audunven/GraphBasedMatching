@@ -96,8 +96,9 @@ public class ReadJson {
 						String functionId = null;
 
 						List<LegalReference> legalReferences = new ArrayList<LegalReference>();
+						List<KostraCode> kostraCodes = new ArrayList<KostraCode>();
 						JsonArray lawAndRegulationsArray;
-						JsonObject kostraCodeObject;
+						JsonArray kostraCodeArray;
 						for (Map.Entry<String, JsonElement> properties : levelFourEntries) {
 
 							if (properties.getValue().isJsonArray() == true) {
@@ -157,7 +158,69 @@ public class ReadJson {
 
 
 								} else if (properties.getKey().equals("kostraCodes") && properties.getValue() != null) {
-									//kostraCodeObject = properties.getValue().getAsJsonObject();
+									kostraCodeArray = properties.getValue().getAsJsonArray();
+									
+									List<JsonElement> kostraCodeList = kostraCodeArray.asList();									
+
+									String kcId = null;
+									String municipalityArea = null;
+									String municipalityAreaName = null;
+									String municipalityCode = null;
+									String municipalityCodeName = null;
+									String countyArea = null;
+									String countyAreaName = null;
+									String countyCode = null;
+									String countyCodeName = null;
+									String kcActivityId = null;
+
+									JsonObject kostraCodeObject;
+									for (JsonElement kostraCodeElement : kostraCodeList) {
+
+										kostraCodeObject = kostraCodeElement.getAsJsonObject();
+										Set<Map.Entry<String, JsonElement>> kostraCodeEntries = kostraCodeObject.entrySet();
+
+										for (Map.Entry<String, JsonElement> kostraCodeProperties : kostraCodeEntries) {
+
+											if (kostraCodeProperties.getKey().equals("id")) {
+												kcId = kostraCodeProperties.getValue().toString();
+											} else if (kostraCodeProperties.getKey().equals("municipalityArea")) {
+												municipalityArea = kostraCodeProperties.getValue().toString();
+											} else if (kostraCodeProperties.getKey().equals("municipalityAreaName")) {
+												municipalityAreaName = kostraCodeProperties.getValue().toString();
+											} else if (kostraCodeProperties.getKey().equals("municipalityCode")) {
+												municipalityCode = kostraCodeProperties.getValue().toString();
+											} else if (kostraCodeProperties.getKey().equals("municipalityCodeName")) {
+												municipalityCodeName = kostraCodeProperties.getValue().toString();
+											} else if (kostraCodeProperties.getKey().equals("countyArea")) {
+												countyArea = kostraCodeProperties.getValue().toString();
+											} else if (kostraCodeProperties.getKey().equals("countyAreaName")) {
+												countyAreaName = kostraCodeProperties.getValue().toString();
+											} else if (kostraCodeProperties.getKey().equals("countyCode")) {
+												countyCode = kostraCodeProperties.getValue().toString();
+											} else if (kostraCodeProperties.getKey().equals("countyCodeName")) {
+												countyCodeName = kostraCodeProperties.getValue().toString();
+											} else {
+												kcActivityId = kostraCodeProperties.getValue().toString();
+											}
+											
+											kc = new KostraCode.KostraCodeBuilder()
+													.setId(kcId)
+													.setMunicipalityArea(municipalityArea)
+													.setMunicipalityAreaName(municipalityAreaName)
+													.setMunicipalityCode(municipalityCode)
+													.setMunicipalityCodeName(municipalityCodeName)
+													.setCountyArea(countyArea)
+													.setCountyAreaName(countyAreaName)
+													.setCountyCode(countyCode)
+													.setCountyCodeName(countyCodeName)
+													.setActivityId(kcActivityId)
+													.build();
+											
+										}
+										
+										kostraCodes.add(kc);
+									}
+									
 								}
 
 							} else {
@@ -191,6 +254,7 @@ public class ReadJson {
 								.setL2Title(l2Function)
 								.setL3Title(l3Function)
 								.setLegalReferences(legalReferences)
+								.setKostraCodes(kostraCodes)
 								.build();
 
 						allFunctions.add(kcf);
@@ -203,7 +267,6 @@ public class ReadJson {
 
 		}
 
-		//System.out.println("There are " + allFunctions.size() + " functions.");
 		return allFunctions;
 	}
 

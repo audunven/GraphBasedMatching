@@ -112,7 +112,9 @@ public class KCodesFunction {
 		  
 		  return "Id: " + this.id + "\nTitle: " + this.title + "\nKCode: " 
 		  + this.code + "\nL1-function: " + this.l1Title + "\nL2-function: " 
-				  + this.l2Title + "\nL3-function: " + this.l3Title + "\nLegalReferences: " + this.legalReferences;
+				  + this.l2Title + "\nL3-function: " + this.l3Title 
+				  + "\nLegal References: " + this.legalReferences 
+				  + "\nKostra Codes:" + this.kostraCodes;
 		  
 	  }
 
