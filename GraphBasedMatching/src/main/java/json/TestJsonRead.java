@@ -29,8 +29,7 @@ public class TestJsonRead {
 		JsonObject jo;
 		for (Map.Entry<String, JsonElement> entry : entrySet) {
 
-			//
-			System.out.println("ParentKey (L1): " + entry.getKey());
+			System.out.println("L1: " + entry.getKey());
 			jo = entry.getValue().getAsJsonObject();
 			Set<Map.Entry<String, JsonElement>> entries = jo.entrySet();
 			
@@ -38,14 +37,14 @@ public class TestJsonRead {
 			
 			for (Map.Entry<String, JsonElement> e : entries) {
 				
-				System.out.println("-ChildKey (L2): " + e.getKey());
+				System.out.println("\tL2: " + e.getKey());
 				job = e.getValue().getAsJsonObject();
 				Set<Map.Entry<String, JsonElement>> childEntries = job.entrySet();
 				
 				JsonArray array;
 				for (Map.Entry<String, JsonElement> ce : childEntries) {
 					
-					System.out.println("----ChildChildKey (L3): " + ce.getKey());
+					System.out.println("\t\tL3: " + ce.getKey());
 					
 					array = ce.getValue().getAsJsonArray();
 					

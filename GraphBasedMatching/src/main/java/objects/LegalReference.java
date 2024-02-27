@@ -64,6 +64,11 @@ public class LegalReference {
 	    public int hashCode() {
 	        return Objects.hash(id);
 	    }
+	  
+	  public String toString() {
+		  
+		  return "Legal Reference ID: " + this.id;
+	  }
 
 	public static class LegalReferenceBuilder {
 		

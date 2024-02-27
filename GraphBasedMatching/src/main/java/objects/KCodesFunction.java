@@ -15,6 +15,9 @@ public class KCodesFunction {
 	private boolean stateGovernance;
 	private List<LegalReference> legalReferences;
 	private List<KostraCode> kostraCodes;
+	private String l1Title;
+	private String l2Title;
+	private String l3Title;
 	
 	public KCodesFunction(KCodesFunctionBuilder builder) {
 		
@@ -29,6 +32,9 @@ public class KCodesFunction {
 		this.stateGovernance = builder.stateGovernance;
 		this.legalReferences = builder.legalReferences;
 		this.kostraCodes = builder.kostraCodes;
+		this.l1Title = builder.l1Title;
+		this.l2Title = builder.l2Title;
+		this.l3Title = builder.l3Title;
 		
 	}
 	
@@ -76,6 +82,18 @@ public class KCodesFunction {
 		return kostraCodes;
 	}
 
+	public String getL1Title() {
+		return l1Title;
+	}
+
+	public String getL2Title() {
+		return l2Title;
+	}
+
+	public String getL3Title() {
+		return l3Title;
+	}
+
 	@Override
 	public boolean equals (Object o) {
 		if ( o instanceof KostraCode && ((KostraCode) o).getId() == this.id ) {
@@ -89,6 +107,14 @@ public class KCodesFunction {
 	    public int hashCode() {
 	        return Objects.hash(id);
 	    }
+	  
+	  public String toString() {
+		  
+		  return "Id: " + this.id + "\nTitle: " + this.title + "\nKCode: " 
+		  + this.code + "\nL1-function: " + this.l1Title + "\nL2-function: " 
+				  + this.l2Title + "\nL3-function: " + this.l3Title + "\nLegalReferences: " + this.legalReferences;
+		  
+	  }
 
 
 	public static class KCodesFunctionBuilder {
@@ -104,6 +130,9 @@ public class KCodesFunction {
 		private boolean stateGovernance;
 		private List<LegalReference> legalReferences;
 		private List<KostraCode> kostraCodes;
+		private String l1Title;
+		private String l2Title;
+		private String l3Title;
 		
 		public KCodesFunctionBuilder() {}
 
@@ -162,6 +191,21 @@ public class KCodesFunction {
 			return this;
 		}
 		
+		public KCodesFunctionBuilder setL1Title(String l1Title) {
+			this.l1Title = l1Title;
+			return this;
+		}
+
+		public KCodesFunctionBuilder setL2Title(String l2Title) {
+			this.l2Title = l2Title;
+			return this;
+		}
+
+		public KCodesFunctionBuilder setL3Title(String l3Title) {
+			this.l3Title = l3Title;
+			return this;
+		}
+
 		public KCodesFunction build() {
 			return new KCodesFunction(this);
 		}
