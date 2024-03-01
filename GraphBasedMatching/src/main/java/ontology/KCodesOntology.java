@@ -52,9 +52,6 @@ public class KCodesOntology {
 
 			//concepts and their names
 			String functionType = "Function";
-//			String coreFunctionType = "CoreFunction";
-//			String managementFunctionType = "ManagementFunction";
-//			String supportFunctionType = "SupportFunction";
 			String legalReferenceType = "LegalReference";
 			String kostraCodeType = "KostraCode";
 
@@ -141,14 +138,6 @@ public class KCodesOntology {
 				l1FunctionEntity = StringUtilities.replaceQuotesAndCommas(kcf.getL1Title()) + ">";
 				l2FunctionEntity = StringUtilities.replaceQuotesAndCommas(kcf.getL2Title()) + ">";
 				l3FunctionEntity = StringUtilities.replaceQuotesAndCommas(kcf.getL3Title()) + ">";
-			
-								
-//				if (kcf.getL3Title().equals("Bibliotek")) {
-//				System.out.println("functionEntity: " + functionEntity);
-//				System.out.println("l1FunctionEntity: " + l1FunctionEntity);
-//				System.out.println("l2FunctionEntity: " + l2FunctionEntity);
-//				System.out.println("l3FunctionEntity: " + l3FunctionEntity);
-//				}
 				
 				bw.write(KGUtilities.createType(functionEntity.replaceAll("[\\s()?+]", "_"), baseURI, RDF_TYPE_NS, functionType.replaceAll("[\\s()?+]", "_"), tripleClosure));
 				bw.write(KGUtilities.createType(l1FunctionEntity.replaceAll("[\\s()?+]", "_"), baseURI, RDF_TYPE_NS, functionType.replaceAll("[\\s()?+]", "_"), tripleClosure));
@@ -179,8 +168,8 @@ public class KCodesOntology {
 				
 				if (legalReferences != null || !legalReferences.isEmpty()) {
 					legalReferenceEntity = null;
-					for (LegalReference lr : legalReferences) {
-						legalReferenceEntity = StringUtilities.replaceQuotesAndCommas(lr.getShortTitle()) + ">";
+					for (LegalReference lr : legalReferences) {			
+						legalReferenceEntity = StringUtilities.replaceQuotesAndCommas(lr.getTitle()).replaceAll("\\[", "_").replaceAll("\\]", "_") + ">";
 						bw.write(KGUtilities.createType(legalReferenceEntity.replaceAll("[\\s()?+]", "_"), baseURI, RDF_TYPE_NS, legalReferenceType.replaceAll("[\\s()?+]", "_"), tripleClosure));
 						//declare object properties
 						bw.write(KGUtilities.createObjectProperty(functionEntity.replaceAll("[\\s()?+]", "_"), baseURI, "hasLegalReference", legalReferenceEntity.replaceAll("[\\s()?+]", "_"), " .\n"));
@@ -192,7 +181,6 @@ public class KCodesOntology {
 						bw.write(KGUtilities.createDataProperty(legalReferenceEntity.replaceAll("[\\s()?+]", "_"), baseURI, "paragraph", StringUtilities.replaceQuotesAndCommas(lr.getParagraph()), "^^" + DATATYPE_STRING_NS, tripleClosure));
 						bw.write(KGUtilities.createDataProperty(legalReferenceEntity.replaceAll("[\\s()?+]", "_"), baseURI, "paragraphTitle", StringUtilities.replaceQuotesAndCommas(lr.getParagraphTitle()), "^^" + DATATYPE_STRING_NS, tripleClosure));
 						bw.write(KGUtilities.createDataProperty(legalReferenceEntity.replaceAll("[\\s()?+]", "_"), baseURI, "shortTitle", StringUtilities.replaceQuotesAndCommas(lr.getShortTitle()), "^^" + DATATYPE_STRING_NS, tripleClosure));
-						
 					}			
 				}
 				
